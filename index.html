@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Character Counter</title>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <img class="logo" src="./assets/images/logo-dark-theme.svg" alt="Character Counter Logo">
+      <button class="theme-toggle"  aria-label="Toggle dark/light mode">
+        <img id="themeToggle" class="theme-icon" src="./assets/images/icon-sun.svg" alt="">
+      </button>
+    </nav>
+
+    <header class="header">
+      <h1 class="title">Analyze your text in real-time.</h1>
+    </header>
+ 
+    <main class="main-content">
+      <section class="text-input-section">
+        <form id="textForm">
+          <textarea name="text" id="textInput" placeholder="Type your text here...">Design is the silent ambassador of your brand. Simplicity is key to effective communication, creating clarity in every interaction. A great design transforms complex ideas into elegant solutions, making them easy to understand. It blends aesthetics and functionality seamlessly.</textarea>
+          
+          <div class="options">
+            <div class="option">
+              <div>
+                <input type="checkbox" name="excludeSpaces" id="excludeSpaces">
+                <label for="excludeSpaces" class="spaces-text">Exclude Spaces</label> 
+              </div>
+               <div>
+                <input type="checkbox" name="charLimit" id="charLimit">
+                <label for="charLimit" class="char-text">Set Character Limit</label>
+               </div>
+             
+              </div>
+            <div>
+              <p class="reading-time" id="readingTime">Approx. reading time: &lt;1 minute</p>
+      
+            </div>
+            
+          </div>
+          
+           </form>
+      </section>
+      
+      <section class="box-section">
+        <div class="box-grid">
+          <div class="box-card" id="totalChars">
+            <h3 id="totalCharactersText">00</h3>
+            <p>Total Characters</p>
+          </div>
+          
+          <div class="box-card" id="wordsCount">
+            <h3 id="wordCountText">00</h3>
+            <p>Word Count</p>
+          </div>
+          
+          <div class="box-card" id="sentencesCount">
+            <h3 id="sentenceCountText">00</h3>
+            <p>Sentence Count</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="letter-density-section">
+        <h2>Letter Density</h2>
+        
+        <div class="density-grid">
+          <div class="density-item range-e">
+            <span class="letters">E</span>
+            <input type="range" min="0" max="100" value="0" disabled>
+            <span class="percentage">40 (16.06%)</span>
+          </div>
+          
+          <div class="density-item range-i">
+            <span class="letters">I</span>
+            <input type="range" min="0" max="100" value="0" disabled>
+            <span class="percentage">29 (11.65%)</span>
+          </div>
+          
+          <div class="density-item range-t">
+            <span class="letters">T</span>
+            <input type="range" min="0" max="100" value="0" disabled>
+            <span class="percentage">28 (11.24%)</span>
+          </div>
+          
+          <div class="density-item range-o">
+            <span class="letters">O</span>
+            <input type="range" min="0" max="100" value="0" disabled>
+            <span class="percentage">22 (8.84%)</span>
+          </div>
+          
+          <div class="density-item range-n">
+            <span class="letters">N</span>
+            <input type="range" min="0" max="100" value="0" disabled>
+            <span class="percentage">21 (8.43%)</span>
+          </div>
+        </div>
+        
+        <a href="#" class="see-more">See more
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+        </a>
+        
+      </section>
+    </main>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
