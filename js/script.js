@@ -52,9 +52,119 @@ function updateTextInput() {
       checkCharacterLimit(charCount);
     }
 
+// Letter Density Calculation
+function calculateLetterDensity(text) {
+    // Clear previous results
+    densityGrid.innerHTML = '';
+    
+    // Filter only letters and convert to lowercase
+    const letters = text.toLowerCase().replace(/[^a-z]/g, '');
+    const totalLetters = letters.length;
+    
+    if (totalLetters === 0) {
+      densityGrid.innerHTML = '<p>No characters found. Start typing to see letter density</p>';
+      return;
+    }
+    
+    // Count each letter occurrence
+    const letterCounts = {};
+    for (const letter of letters) {
+      letterCounts[letter] = (letterCounts[letter] || 0) + 1;
+    }
+    
+    // Convert to array and sort by count (descending)
+    const sortedLetters = Object.entries(letterCounts)
+      .sort((a, b) => b[1] - a[1]);
+    
+    // Determine how many to show (5 initially, or all if showAllLetters is true)
+    const lettersToShow = showAllLetters ? sortedLetters : sortedLetters.slice(0, 5);
+    
+    // Create progress bars for each letter
+    lettersToShow.forEach(([letter, count]) => {
+      const percentage = ((count / totalLetters) * 100).toFixed(2);
+      
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      
+      bar.innerHTML = `
+        <div class="info">
+          <span>${letter.toUpperCase()}</span>
+        </div>
+        <div class="progress-bar">
+          <span class="letter-${letter}" style="width: ${percentage}%"></span>
+        </div>
+        <div class="percentage">
+          <span class="percentage">${count} (${percentage}%)</span>
+        </div>
+      `;
+      
+      densityGrid.appendChild(bar);
+    });
+    
+    // Show "See More" if there are more letters to show
+    if (sortedLetters.length > 5 && !showAllLetters) {
+      densityGrid.appendChild(seeMoreBtn);
+    }
+  }
 
 
+
+   // Letter Density Calculation
+   function calculateLetterDensity(text) {
+    // Clear previous results
+    densityGrid.innerHTML = '';
+    
+    // Filter only letters and convert to lowercase
+    const letters = text.toLowerCase().replace(/[^a-z]/g, '');
+    const totalLetters = letters.length;
+    
+    if (totalLetters === 0) {
+      densityGrid.innerHTML = '<p>No characters found. Start typing to see letter density</p>';
+      return;
+    }
+    
+    // Count each letter occurrence
+    const letterCounts = {};
+    for (const letter of letters) {
+      letterCounts[letter] = (letterCounts[letter] || 0) + 1;
+    }
+    
+    // Convert to array and sort by count (descending)
+    const sortedLetters = Object.entries(letterCounts)
+      .sort((a, b) => b[1] - a[1]);
+    
+    // Determine how many to show (5 initially, or all if showAllLetters is true)
+    const lettersToShow = showAllLetters ? sortedLetters : sortedLetters.slice(0, 5);
+    
+    // Create progress bars for each letter
+    lettersToShow.forEach(([letter, count]) => {
+      const percentage = ((count / totalLetters) * 100).toFixed(2);
+      
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      
+      bar.innerHTML = `
+        <div class="info">
+          <span>${letter.toUpperCase()}</span>
+        </div>
+        <div class="progress-bar">
+          <span class="letter-${letter}" style="width: ${percentage}%"></span>
+        </div>
+        <div class="percentage">
+          <span class="percentage">${count} (${percentage}%)</span>
+        </div>
+      `;
+      
+      densityGrid.appendChild(bar);
+    });
+    
+    // Show "See More" if there are more letters to show
+    if (sortedLetters.length > 5 && !showAllLetters) {
+      densityGrid.appendChild(seeMoreBtn);
+    }
+  }
 });
+
 
 
 //Event listener for see more button
