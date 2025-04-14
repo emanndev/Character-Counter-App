@@ -432,6 +432,37 @@ svg{
   animation: pulseBorder 1.5s infinite;
 }
 
+/* Character Limit Warning */
+.limit-warning {
+  font-family: "DM_Sans", sans-serif;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.char-limit-input {
+  margin-left: 0.5rem;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  width: 80px;
+}
+
+/* Empty state styles */
+.density-grid > p {
+  font-family: "DM_Sans", sans-serif;
+  color: var(--text-color-2);
+  text-align: center;
+  padding: 1rem;
+}
+
+
+
+
 
 
 /*Tablet and Desktop Responsiveness  */
