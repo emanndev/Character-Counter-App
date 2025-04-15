@@ -279,6 +279,16 @@
     margin: 0 auto; 
   }
 
+  .density-grid p{
+    display: flex;
+    align-items: flex-start;
+    margin-left: -16px;
+    width: 100%;
+    font-family: "DM_Sans", sans-serif;
+    font-size: 1rem;
+    color: var(--text-color-2);
+  }
+
 /* progress bar styles */
   .density-grid .bar {
     display: grid;
@@ -319,6 +329,8 @@
   width: 70%;
   transition: width 0.3s ease;
 }
+
+
 
 .percentage {
   font-family: "DM_Sans", sans-serif;
@@ -378,11 +390,6 @@
     opacity: 0.8;
   }
   
-svg{
-  position: relative;
-  top: 6px;
-  left: -2px;
-}
 
 
 /* See More/Less Button Styles */
@@ -406,26 +413,6 @@ svg{
   background-color: rgba(192, 143, 201, 0.1);
 }
 
-/* See more Arrow Styles */
-/* 
-.arrow {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  transition: all 0.2s ease;
-}
-
-.arrow.down {
-  border-top: 5px solid var(--primary-color);
-  border-bottom: none;
-}
-
-.arrow.up {
-  border-bottom: 5px solid var(--primary-color);
-  border-top: none;
-} */
 
 /* See More/Less Button with Arrowhead */
 .see-more {
