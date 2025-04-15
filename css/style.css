@@ -385,6 +385,69 @@ svg{
 }
 
 
+/* See More/Less Button Styles */
+.see-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-family: "DM_Sans", sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.see-more:hover {
+  background-color: rgba(192, 143, 201, 0.1);
+}
+
+/* See more Arrow Styles */
+/* 
+.arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.arrow.down {
+  border-top: 5px solid var(--primary-color);
+  border-bottom: none;
+}
+
+.arrow.up {
+  border-bottom: 5px solid var(--primary-color);
+  border-top: none;
+} */
+
+/* See More/Less Button with Arrowhead */
+.see-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-color-2);
+  font-family: "DM_Sans", sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.see-more:hover {
+  opacity: 0.8;
+}
+
+
 /* Animation for card entrance */
 @keyframes cardEntrance {
   from {
@@ -430,6 +493,34 @@ svg{
 
 #textInput:focus {
   animation: pulseBorder 1.5s infinite;
+}
+
+/* Character Limit Warning */
+.limit-warning {
+  font-family: "DM_Sans", sans-serif;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.char-limit-input {
+  margin-left: 0.5rem;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  width: 80px;
+}
+
+/* Empty state styles */
+.density-grid > p {
+  font-family: "DM_Sans", sans-serif;
+  color: var(--text-color-2);
+  text-align: center;
+  padding: 1rem;
 }
 
 
