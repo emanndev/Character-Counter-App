@@ -385,6 +385,69 @@ svg{
 }
 
 
+/* See More/Less Button Styles */
+.see-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-family: "DM_Sans", sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.see-more:hover {
+  background-color: rgba(192, 143, 201, 0.1);
+}
+
+/* See more Arrow Styles */
+/* 
+.arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.arrow.down {
+  border-top: 5px solid var(--primary-color);
+  border-bottom: none;
+}
+
+.arrow.up {
+  border-bottom: 5px solid var(--primary-color);
+  border-top: none;
+} */
+
+/* See More/Less Button with Arrowhead */
+.see-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-color-2);
+  font-family: "DM_Sans", sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.see-more:hover {
+  opacity: 0.8;
+}
+
+
 /* Animation for card entrance */
 @keyframes cardEntrance {
   from {
@@ -459,9 +522,6 @@ svg{
   text-align: center;
   padding: 1rem;
 }
-
-
-
 
 
 
