@@ -8,7 +8,69 @@ document.addEventListener('DOMContentLoaded', function() {
     const densityGrid = document.querySelector('.density-grid');
     const charLimitCheckbox = document.getElementById('charLimit');
     const excludeSpacesCheckbox = document.getElementById('excludeSpaces');
-    
+
+
+
+     // DOM Elements for theme toggle
+     const themeToggle = document.getElementById('themeToggle');
+     const themeIcon = document.getElementById('themeIcon');
+     const body = document.body;
+     const logo = document.getElementById('logo');
+     
+     // Get saved theme or detect preferred color scheme
+     let currentTheme = localStorage.getItem('theme') || 
+                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+     
+     // Set initial theme
+     if (currentTheme === 'light') {
+         setLightTheme();
+     } else {
+         setDarkTheme();
+     }
+ 
+     // Theme toggle event listener
+     themeToggle.addEventListener('click', () => {
+         if (currentTheme === 'light') {
+             setDarkTheme();
+         } else {
+             setLightTheme();
+         }
+     });
+ 
+     function setLightTheme() {
+         // Update classes
+         body.classList.remove('dark-theme');
+         body.classList.add('light-theme');
+         document.documentElement.setAttribute('data-theme', 'light');
+        
+         
+        
+         
+         // Update images
+         themeIcon.src = "./assets/images/icon-moon.svg";
+         logo.src = "./assets/images/logo-light-theme.svg";
+         // Save preference
+         localStorage.setItem('theme', 'light');
+         currentTheme = 'light';
+     }
+ 
+     function setDarkTheme() {
+         // Update classes
+         body.classList.remove('light-theme');
+         body.classList.add('dark-theme');
+         document.documentElement.setAttribute('data-theme', 'dark');
+         
+         // Update images
+         themeIcon.src = "./assets/images/icon-sun.svg";
+         logo.src = "./assets/images/logo-dark-theme.svg";
+         
+         // Save preference
+         localStorage.setItem('theme', 'dark');
+         currentTheme = 'dark';
+     }
+     themeToggle.setAttribute('aria-pressed', currentTheme === 'dark');
+ 
+
     // Variables
     let charLimit = null;
     let showAllLetters = false;
@@ -167,6 +229,8 @@ document.addEventListener('DOMContentLoaded', function() {
         warning.className = 'limit-warning';
         
         if (currentCount > charLimit) {
+            const textArea = document.querySelector('textarea');
+            textArea.style.borderColor = '#e74c3c';
           warning.textContent = `ⓘ Limit reached! Your text exceeds ${charLimit} characters`;
           warning.style.color = '#e74c3c';
         } else if (currentCount >= charLimit * 0.9) {
@@ -188,5 +252,8 @@ document.addEventListener('DOMContentLoaded', function() {
         existingWarning.remove();
       }
     }
+
+
+
 });
 

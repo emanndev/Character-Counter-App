@@ -10,20 +10,20 @@
 <body>
   <div class="container">
     <nav class="nav">
-      <img class="logo" src="./assets/images/logo-dark-theme.svg" alt="Character Counter Logo">
-      <button class="theme-toggle"  aria-label="Toggle dark/light mode">
-        <img id="themeToggle" class="theme-icon" src="./assets/images/icon-sun.svg" alt="">
+      <img class="logo" id="logo" src="./assets/images/logo-dark-theme.svg" alt="Character Counter Logo">
+      <button class="theme-toggle" id="themeToggle"  aria-label="Toggle dark/light mode">
+        <img id="themeIcon" class="theme-icon" src="./assets/images/icon-sun.svg" alt="">
       </button>
     </nav>
 
-    <header class="header">
+    <header class="header slide-down">
       <h1 class="title">Analyze your text in real-time.</h1>
     </header>
  
     <main class="main-content">
       <section class="text-input-section">
         <form id="textForm">
-          <textarea name="text" id="textInput" placeholder="Type your text here...">Start typing here...(or paste your text)</textarea>
+          <textarea name="text" id="textInput" placeholder="Start typing here...(or paste your text)"></textarea>
           
           <div class="options">
             <div class="option">
@@ -68,10 +68,10 @@
       </section>
 
       <section class="letter-density-section">
-        <h2>Letter Density</h2>
+        <h2 class="density-text">Letter Density</h2>
         
         <div class="density-grid">
-          <p>No characters found. Start typing to see letter density</p>
+          <p class="progress-text">No characters found. Start typing to see letter density</p>
        
         </div>
         
