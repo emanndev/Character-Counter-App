@@ -8,6 +8,17 @@
   <title>Character Counter</title>
 </head>
 <body>
+  <div id="preloader">
+    <div class="cube">
+      <div class="face front">A B C</div>
+      <div class="face back">D E F</div>
+      <div class="face right">G H I</div>
+      <div class="face left">J K L</div>
+      <div class="face top">M N O</div>
+      <div class="face bottom">P Q R</div>
+    </div>
+  </div>
+  
   <div class="container">
     <nav class="nav">
       <img class="logo" id="logo" src="./assets/images/logo-dark-theme.svg" alt="Character Counter Logo">
@@ -21,11 +32,11 @@
     </header>
  
     <main class="main-content">
-      <section class="text-input-section">
+      <section class="text-input-section slide-in-left ">
         <form id="textForm">
           <textarea name="text" id="textInput" placeholder="Start typing here...(or paste your text)"></textarea>
           
-          <div class="options">
+          <div class="options fade-in">
             <div class="option">
               <div>
                 <input type="checkbox" name="excludeSpaces" id="excludeSpaces">
