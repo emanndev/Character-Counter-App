@@ -685,7 +685,7 @@ body.dark-theme{
     opacity: 1;
   }
 }
-
+/* Mouse Trail Animation */
 .symbol {
   position: fixed;
   font-size: 20px;
