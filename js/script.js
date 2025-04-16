@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    //animation for preloader
+    //animation for letters cube preloader
     window.addEventListener("load", () => {
         const preloader = document.getElementById("preloader");
   
       
-        // Fade out the preloader
+        // Fade out the cube preloader
         preloader.style.transition = "opacity 2s ease";
         preloader.style.opacity = "0";
       
@@ -63,10 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
          body.classList.remove('dark-theme');
          body.classList.add('light-theme');
          document.documentElement.setAttribute('data-theme', 'light');
-        
-         
-        
-         
+
          // Update images
          themeIcon.src = "./assets/images/icon-moon.svg";
          logo.src = "./assets/images/logo-light-theme.svg";
@@ -274,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-    //Mouse pointer animation
+    //Mouse trail animation
     const symbols = ['∑', 'π', '√', '∫', '∞'];
 
     document.addEventListener('mousemove', (e) => {

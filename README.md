@@ -19,6 +19,7 @@ It comes with a slick preloader animation, light/dark mode toggle, and an intera
 
 🎨 Colorful Math Symbols Mouse Trail Effect
 
+
 ##📁 Project Structure
 
 ├── index.html
@@ -26,13 +27,12 @@ It comes with a slick preloader animation, light/dark mode toggle, and an intera
 │   └── style.css
 ├── js/
 │   └── script.js
+├── Readme.md
+│   
 └── assets/
     └── images/
-        ├── favicon-32x32.png
-        ├── icon-moon.svg
-        ├── icon-sun.svg
-        ├── logo-dark-theme.svg
-        └── logo-light-theme.svg
+    ├── fonts
+       
 
 
 ##🛠️ How It Works
@@ -64,9 +64,9 @@ Live Analytics – Instantly see updated metrics:
 
 ##📷  Demo
 
-🔗 [Live Demo](https://emanndev.github.io/Lab-2/) 
+🔗 [Live Demo](https://emanndev.github.io/Lab-3/) 
 
-📂 [GitHub Repository](https://github.com/emanndev/Lab-2)
+📂 [GitHub Repository](https://github.com/emanndev/Lab-3)
 
 
 ##💡 Technologies Used
@@ -80,6 +80,7 @@ JavaScript (Vanilla)
 FontAwesome (for icons)
 
 LocalStorage (for theme persistence)
+
 
 ##⚙️ Setup Instructions
 
