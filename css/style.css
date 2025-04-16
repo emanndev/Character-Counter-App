@@ -61,8 +61,52 @@ body.dark-theme{
     min-height: 100vh;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
-
+/*preloader cube animation*/
+  #preloader {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    z-index: 9999;
+  }
   
+  .cube {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: spin 3s linear infinite;
+  }
+  
+  .face {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #0f0;
+    border: 2px solid #0f0;
+  }
+  
+  .front  { transform: rotateY(0deg) translateZ(75px); }
+  .back   { transform: rotateY(180deg) translateZ(75px); }
+  .right  { transform: rotateY(90deg) translateZ(75px); }
+  .left   { transform: rotateY(-90deg) translateZ(75px); }
+  .top    { transform: rotateX(90deg) translateZ(75px); }
+  .bottom { transform: rotateX(-90deg) translateZ(75px); }
+  
+  @keyframes spin {
+    0%   { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+  }
+
+
 
   /* Layout */
   .container {
@@ -599,10 +643,9 @@ body.dark-theme{
 }
 
 
-
 /* Slide Down Animation */
 .slide-down {
-  animation: slideDown 1s ease-out forwards;
+  animation: slideDown 3s ease-out forwards;
   transform: translateY(-150%);
   opacity: 0;
   transition: all 0.3s ease-in-out;
@@ -630,3 +673,36 @@ body.dark-theme{
     opacity: 1;
   }
 }
+
+/* Fade In Animation */
+.fade-in {
+  animation: fadeIn 2s ease-in forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.symbol {
+  position: fixed;
+  font-size: 20px;
+  color: #00f;
+  pointer-events: none;
+  animation: fadeUp 1s forwards;
+  z-index: 9999;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) scale(1.5);
+  }
+}
+

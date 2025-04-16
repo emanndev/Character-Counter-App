@@ -1,4 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+    //animation for preloader
+    window.addEventListener("load", () => {
+        const preloader = document.getElementById("preloader");
+  
+      
+        // Fade out the preloader
+        preloader.style.transition = "opacity 2s ease";
+        preloader.style.opacity = "0";
+      
+        setTimeout(() => {
+          preloader.style.display = "none";
+      
+          // Trigger animation
+          document.body.classList.add("page-loaded");
+        }, 1000);
+      });
+
+
+
+
     // DOM Elements
     const textInput = document.getElementById('textInput');
     const totalCharsText = document.getElementById('totalCharactersText');
@@ -74,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Variables
     let charLimit = null;
     let showAllLetters = false;
-    const averageReadingSpeed = 200; // words per minute
+    const averageReadingSpeed = 200;
     
  
       // Create See More button with arrowhead down symbol
@@ -139,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear previous results
         densityGrid.innerHTML = '';
         
-        // Filter only letters and convert to lowercase
+        // Filter only the letters and convert to lowercase
         const letters = text.toLowerCase().replace(/[^a-z]/g, '');
         const totalLetters = letters.length;
       
@@ -154,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
             letterCounts[letter] = (letterCounts[letter] || 0) + 1;
         }
         
-        // Convert to array and sort by count (descending)
+        // Convert to array and sort by count
         const sortedLetters = Object.entries(letterCounts)
             .sort((a, b) => b[1] - a[1]);
         
@@ -253,7 +274,23 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
+    //Mouse pointer animation
+    const symbols = ['∑', 'π', '√', '∫', '∞'];
 
+    document.addEventListener('mousemove', (e) => {
+      const symbol = document.createElement('div');
+      symbol.className = 'symbol';
+      symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      symbol.style.left = `${e.clientX}px`;
+      symbol.style.top = `${e.clientY}px`;
+      symbol.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      document.body.appendChild(symbol);
+    
+      setTimeout(() => {
+        symbol.remove();
+      }, 1000); 
+    });
 
+   
 });
 
