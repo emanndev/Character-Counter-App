@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
       
         setTimeout(() => {
           preloader.style.display = "none";
-      
-          // Trigger animation
           document.body.classList.add("page-loaded");
         }, 1000);
       });
@@ -63,11 +61,9 @@ document.addEventListener('DOMContentLoaded', function() {
          body.classList.remove('dark-theme');
          body.classList.add('light-theme');
          document.documentElement.setAttribute('data-theme', 'light');
-
-         // Update images
          themeIcon.src = "./assets/images/icon-moon.svg";
          logo.src = "./assets/images/logo-light-theme.svg";
-         // Save preference
+
          localStorage.setItem('theme', 'light');
          currentTheme = 'light';
      }
@@ -76,20 +72,16 @@ document.addEventListener('DOMContentLoaded', function() {
          // Update classes
          body.classList.remove('light-theme');
          body.classList.add('dark-theme');
-         document.documentElement.setAttribute('data-theme', 'dark');
-         
-         // Update images
+         document.documentElement.setAttribute('data-theme', 'dark');  
          themeIcon.src = "./assets/images/icon-sun.svg";
          logo.src = "./assets/images/logo-dark-theme.svg";
          
-         // Save preference
          localStorage.setItem('theme', 'dark');
          currentTheme = 'dark';
      }
      themeToggle.setAttribute('aria-pressed', currentTheme === 'dark');
  
 
-    // Variables
     let charLimit = null;
     let showAllLetters = false;
     const averageReadingSpeed = 200;
@@ -106,12 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
     charLimitCheckbox.addEventListener('change', toggleCharLimitInput);
     excludeSpacesCheckbox.addEventListener('change', updateTextInput);
     
-    // Initialize UI
     updateTextInput();
 
 
     // Update text input function
-    // This function updates the character, word, and sentence counts
+
     function updateTextInput() {
       const text = textInput.value;
       
@@ -128,13 +119,10 @@ document.addEventListener('DOMContentLoaded', function() {
       wordCountText.textContent = wordCount;
       sentenceCountText.textContent = sentenceCount;
       
-      // Calculate reading time
       updateReadingTime(wordCount);
       
-      // Calculate letter density
       calculateLetterDensity(text);
       
-      // Check character limit
       checkCharacterLimit(charCount);
     }
     
@@ -154,7 +142,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function calculateLetterDensity(text) {
-        // Clear previous results
         densityGrid.innerHTML = '';
         
         // Filter only the letters and convert to lowercase
