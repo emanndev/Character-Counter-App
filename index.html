@@ -8,24 +8,35 @@
   <title>Character Counter</title>
 </head>
 <body>
+  <div id="preloader">
+    <div class="cube">
+      <div class="face front">A B C</div>
+      <div class="face back">D E F</div>
+      <div class="face right">G H I</div>
+      <div class="face left">J K L</div>
+      <div class="face top">M N O</div>
+      <div class="face bottom">P Q R</div>
+    </div>
+  </div>
+  
   <div class="container">
     <nav class="nav">
-      <img class="logo" src="./assets/images/logo-dark-theme.svg" alt="Character Counter Logo">
-      <button class="theme-toggle"  aria-label="Toggle dark/light mode">
-        <img id="themeToggle" class="theme-icon" src="./assets/images/icon-sun.svg" alt="">
+      <img class="logo" id="logo" src="./assets/images/logo-dark-theme.svg" alt="Character Counter Logo">
+      <button class="theme-toggle" id="themeToggle"  aria-label="Toggle dark/light mode">
+        <img id="themeIcon" class="theme-icon" src="./assets/images/icon-sun.svg" alt="">
       </button>
     </nav>
 
-    <header class="header">
+    <header class="header slide-down">
       <h1 class="title">Analyze your text in real-time.</h1>
     </header>
  
     <main class="main-content">
-      <section class="text-input-section">
+      <section class="text-input-section slide-in-left ">
         <form id="textForm">
-          <textarea name="text" id="textInput" placeholder="Type your text here...">Start typing here...(or paste your text)</textarea>
+          <textarea name="text" id="textInput" placeholder="Start typing here...(or paste your text)"></textarea>
           
-          <div class="options">
+          <div class="options fade-in">
             <div class="option">
               <div>
                 <input type="checkbox" name="excludeSpaces" id="excludeSpaces">
@@ -68,81 +79,19 @@
       </section>
 
       <section class="letter-density-section">
-        <h2>Letter Density</h2>
+        <h2 class="density-text">Letter Density</h2>
         
         <div class="density-grid">
-          <p>No characters found. Start typing to see letter density</p>
-
-         
-<!-- <div class="bar">
-<div class="info">
-  <span>E</span>
-</div>
-<div class="progress-bar">
-  <span class="letter-E"></span>
-</div>
-<div class="percentage">
-  <span class="percentage">40 (16.06%)</span>
-</div>
-</div>
-<div class="bar">
-<div class="info">
-  <span>I</span>
-</div>
-<div class="progress-bar">
-  <span class="letter-I"></span>
-</div>
-<div class="percentage">
-  <span class="percentage">29 (11.65%)</span>
-</div>
-</div>
-<div class="bar">
-<div class="info">
-  <span>T</span>
-</div>
-<div class="progress-bar">
-  <span class="letter-T"></span>
-</div>
-<div class="percentage">
-  <span class="percentage">28 (11.24%)</span>
-</div>
-</div>
-<div class="bar">
-<div class="info">
-  <span>O</span>
-</div>
-<div class="progress-bar">
-  <span class="letter-O"></span>
-</div>
-<div class="percentage">
-  <span class="percentage">22 (8.84%)</span>
-</div>
-</div>
-<div class="bar">
-<div class="info">
-  <span>N</span>
-</div>
-<div class="progress-bar">
-  <span class="letter-N"></span>
-</div>
-<div class="percentage">
-  <span class="percentage">21 (8.43%)</span>
-</div>
-</div> -->
-
-
+          <p class="progress-text">No characters found. Start typing to see letter density</p>
        
         </div>
-        
-       <!-- <a href="#" class="see-more">See more
-<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
-</a> -->
         
       </section>
     </main>
   </div>
 
   <script src="js/script.js"></script>
+  <script src="https://kit.fontawesome.com/ff488817c2.js" crossorigin="anonymous"></script>
 </body>
 </html>
 
