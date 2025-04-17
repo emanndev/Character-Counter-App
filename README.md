@@ -1,8 +1,8 @@
-#📊 Character Counter Web App
+# 📊 Character Counter Web App
 A real-time text analysis tool that helps you measure character count, word count, sentence count, and letter density as you type. 
 It comes with a slick preloader animation, light/dark mode toggle, and an interactive UI to set character limits and visualize letter frequency distribution.
 
-##🚀 Features
+## 🚀 Features
 🔢 Real-Time Character, Word & Sentence Count
 
 🎯 Exclude Spaces Option
@@ -20,7 +20,7 @@ It comes with a slick preloader animation, light/dark mode toggle, and an intera
 🎨 Colorful Math Symbols Mouse Trail Effect
 
 
-##📁 Project Structure
+## 📁 Project Structure
 
 ├── index.html
 ├── css/
@@ -35,7 +35,7 @@ It comes with a slick preloader animation, light/dark mode toggle, and an intera
        
 
 
-##🛠️ How It Works
+## 🛠️ How It Works
 Input Box – Type or paste any text in the text area.
 
 Live Analytics – Instantly see updated metrics:
@@ -62,14 +62,14 @@ Live Analytics – Instantly see updated metrics:
 
 ⁍ Mouse Trail – Colorful math symbols follow the pointer, giving a playful effect.
 
-##📷  Demo
+## 📷  Demo
 
 🔗 [Live Demo](https://emanndev.github.io/Lab-3/) 
 
 📂 [GitHub Repository](https://github.com/emanndev/Lab-3)
 
 
-##💡 Technologies Used
+## 💡 Technologies Used
 
 HTML5
 
@@ -82,14 +82,13 @@ FontAwesome (for icons)
 LocalStorage (for theme persistence)
 
 
-##⚙️ Setup Instructions
+## ⚙️ Setup Instructions
 
 ⁍ Clone the repository or download the ZIP.
 
 ⁍ Open index.html in any modern browser.
 
 ⁍ (Optional) Serve with a local development server for enhanced experience.
-
 
 ## If using VS Code
 npx live-server
@@ -100,7 +99,7 @@ Responsive design and animations are included.
 
 Ideal for writers, content creators, and developers who need a quick analysis tool.
 
-##🙌 Developer
+## 🙌 Developer
 Developed by: emanndev
 
 ## 📄 License
