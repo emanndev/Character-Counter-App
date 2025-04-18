@@ -112,19 +112,14 @@ document.addEventListener('DOMContentLoaded', function() {
       const charCount = excludeSpacesCheckbox.checked ? text.replace(/\s/g, '').length : text.length;
       const wordCount = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
       const sentenceCount = text.trim() === '' ? 0 : text.split(/[.!?]+/).filter(Boolean).length;
-
+      
+      //No spaces in subtext update
       if (excludeSpaces) {
         totalCharSubtext.textContent = ' (no spaces)';
     } else {
         totalCharSubtext.textContent = '';
     }
 
-      // Prevent typing in textare when at limit
-      if (charLimit && charCount > charLimit) {
-      textInput.value = text.substring(0, charLimit);
-      return;
-      }
-  
       
       // Update counters
       totalCharsText.textContent = charCount;
@@ -173,12 +168,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Convert to array and sort by count
-        const sortedLetters = Object.entries(letterCounts)
-            .sort((a, b) => b[1] - a[1]);
-        
+        const sortedLetters = Object.entries(letterCounts).sort((a, b) => b[1] - a[1]);
         const lettersToShow = showAllLetters ? sortedLetters : sortedLetters.slice(0, 5);
         
-        // Progress bars for the letters
+        // display each progress bars for the letters
         lettersToShow.forEach(([letter, count]) => {
             const percentage = ((count / totalLetters) * 100).toFixed(2);
             
@@ -239,36 +232,37 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Check Character Limit
-    function checkCharacterLimit(currentCount) {
-      removeLimitWarning();
-      if (charLimit && charLimit > 0) {
+   function checkCharacterLimit(currentCount) {
+    removeLimitWarning();
+    if (charLimit && charLimit > 0) {
         const warning = document.createElement('div');
         warning.className = 'limit-warning';
         
-        if (currentCount > charLimit) {
+        // conditon to check if over the limit
+        if (currentCount >= charLimit) {
             const textArea = document.querySelector('textarea');
             textArea.style.borderColor = '#e74c3c';
-            textArea.readOnly = true;
-          warning.textContent = `ⓘ Limit reached! Your text exceeds ${charLimit} characters`;
-          warning.style.color = '#e74c3c';
-        } else if (currentCount >= charLimit * 0.9) {
-          textInput.readOnly = false;
-          warning.textContent = `⚠️ Approaching character limit (${currentCount}/${charLimit})`;
-          warning.style.color = '#f39c12';
-        } else {
-          textInput.readOnly = false;
-          warning.textContent = `Characters: ${currentCount}/${charLimit}`;
-          warning.style.color = '#2ecc71';
+            textInput.value = textInput.value.substring(0, charLimit);
+            warning.textContent = `ⓘ Limit reached at ${charLimit} characters`;
+            warning.style.color = '#e74c3c';
+        } 
+        else if (currentCount >= charLimit * 0.9) {
+            textInput.style.borderColor = ''; // Reset border color
+            warning.textContent = `⚠️ Approaching character limit (${currentCount}/${charLimit})`;
+            warning.style.color = '#f39c12';
+        } 
+        else {
+            textInput.style.borderColor = '';
+            warning.textContent = `Characters: ${currentCount}/${charLimit}`;
+            warning.style.color = '#2ecc71';
         }
-        
         textInput.parentNode.insertBefore(warning, textInput.nextSibling);
-      }else {
-        // If no limit is set, ensure textarea is always editable
-        textInput.readOnly = false;
+    } else {
+        textInput.style.borderColor = '';
     }
-    }
+}
     
-    // Remove existing warning
+    // Remove warning
     function removeLimitWarning() {
       const existingWarning = document.querySelector('.limit-warning');
       if (existingWarning) {
