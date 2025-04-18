@@ -1,16 +1,11 @@
-<<<<<<< HEAD
-📊 #Character Counter Web App
-A real-time text analysis tool that helps you measure character count, word count, sentence count, and letter density as you type. 
+
+# 📊Character Counter Web App
+
+A real-time text analysis tool that helps you measure character count, word count, sentence count, and letter density as you type.
 It comes with a slick preloader animation, light/dark mode toggle, and an interactive UI to set character limits and visualize letter frequency distribution.
 
-🚀## Features
-=======
-# 📊 Character Counter Web App
-A real-time text analysis tool that helps you measure character count, word count, sentence count, and letter density as you type. 
-It comes with a slick preloader animation, light/dark mode toggle, and an interactive UI to set character limits and visualize letter frequency distribution.
+## 🚀Features
 
-## 🚀 Features
->>>>>>> development
 🔢 Real-Time Character, Word & Sentence Count
 
 🎯 Exclude Spaces Option
@@ -27,12 +22,7 @@ It comes with a slick preloader animation, light/dark mode toggle, and an intera
 
 🎨 Colorful Math Symbols Mouse Trail Effect
 
-
-<<<<<<< HEAD
-📁## Project Structure
-=======
-## 📁 Project Structure
->>>>>>> development
+## 📁Project Structure
 
 ├── index.html
 ├── css/
@@ -40,18 +30,12 @@ It comes with a slick preloader animation, light/dark mode toggle, and an intera
 ├── js/
 │   └── script.js
 ├── Readme.md
-│   
 └── assets/
     └── images/
     ├── fonts
-       
 
+## 🛠️How It Works
 
-<<<<<<< HEAD
-🛠️## How It Works
-=======
-## 🛠️ How It Works
->>>>>>> development
 Input Box – Type or paste any text in the text area.
 
 Live Analytics – Instantly see updated metrics:
@@ -78,22 +62,13 @@ Live Analytics – Instantly see updated metrics:
 
 ⁍ Mouse Trail – Colorful math symbols follow the pointer, giving a playful effect.
 
-<<<<<<< HEAD
-📷 ## Demo
-=======
-## 📷  Demo
->>>>>>> development
+## 📷Demo
 
-🔗 [Live Demo](https://emanndev.github.io/Lab-3/) 
+🔗 [Live Demo](https://emanndev.github.io/Lab-3/)
 
 📂 [GitHub Repository](https://github.com/emanndev/Lab-3)
 
-
-<<<<<<< HEAD
-💡## Technologies Used
-=======
-## 💡 Technologies Used
->>>>>>> development
+## 💡Technologies Used
 
 HTML5
 
@@ -105,12 +80,7 @@ FontAwesome (for icons)
 
 LocalStorage (for theme persistence)
 
-
-<<<<<<< HEAD
-⚙️## Setup Instructions
-=======
-## ⚙️ Setup Instructions
->>>>>>> development
+## ⚙️Setup Instructions
 
 ⁍ Clone the repository or download the ZIP.
 
@@ -119,6 +89,7 @@ LocalStorage (for theme persistence)
 ⁍ (Optional) Serve with a local development server for enhanced experience.
 
 ## If using VS Code
+
 npx live-server
 📌 Notes
 This app is fully client-side and doesn't store any input data.
@@ -127,7 +98,8 @@ Responsive design and animations are included.
 
 Ideal for writers, content creators, and developers who need a quick analysis tool.
 
-## 🙌 Developer
+## 🙌Developer
+
 Developed by: emanndev
 
 ## 📄 License

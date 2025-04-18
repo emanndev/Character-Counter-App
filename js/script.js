@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
     // DOM Elements
     const textInput = document.getElementById('textInput');
     const totalCharsText = document.getElementById('totalCharactersText');
@@ -36,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
      const body = document.body;
      const logo = document.getElementById('logo');
      
-     // Get saved theme or detect preferred color scheme
+     // Getting the saved theme from localStorage
      let currentTheme = localStorage.getItem('theme') || 
                        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
      
@@ -108,11 +107,24 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Calculate character, word, and sentence counts
       // Exclude spaces if checkbox is checked
-      const charCount = excludeSpacesCheckbox.checked 
-        ? text.replace(/\s/g, '').length 
-        : text.length;
+      const totalCharSubtext = document.getElementById('totalCharSubtext');
+      const excludeSpaces = excludeSpacesCheckbox.checked;
+      const charCount = excludeSpacesCheckbox.checked ? text.replace(/\s/g, '').length : text.length;
       const wordCount = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
       const sentenceCount = text.trim() === '' ? 0 : text.split(/[.!?]+/).filter(Boolean).length;
+
+      if (excludeSpaces) {
+        totalCharSubtext.textContent = ' (no spaces)';
+    } else {
+        totalCharSubtext.textContent = '';
+    }
+
+      // Prevent typing in textare when at limit
+      if (charLimit && charCount > charLimit) {
+      textInput.value = text.substring(0, charLimit);
+      return;
+      }
+  
       
       // Update counters
       totalCharsText.textContent = charCount;
@@ -144,7 +156,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function calculateLetterDensity(text) {
         densityGrid.innerHTML = '';
         
-        // Filter only the letters and convert to lowercase
+        // Remove non-letter characters and convert to lowercase
+        // Replace all non-letter characters with empty string
         const letters = text.toLowerCase().replace(/[^a-z]/g, '');
         const totalLetters = letters.length;
       
@@ -163,10 +176,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const sortedLetters = Object.entries(letterCounts)
             .sort((a, b) => b[1] - a[1]);
         
-        // Determine how many to show based on current state
         const lettersToShow = showAllLetters ? sortedLetters : sortedLetters.slice(0, 5);
         
-        // Create progress bars for each letter
+        // Progress bars for the letters
         lettersToShow.forEach(([letter, count]) => {
             const percentage = ((count / totalLetters) * 100).toFixed(2);
             
@@ -236,18 +248,24 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentCount > charLimit) {
             const textArea = document.querySelector('textarea');
             textArea.style.borderColor = '#e74c3c';
+            textArea.readOnly = true;
           warning.textContent = `ⓘ Limit reached! Your text exceeds ${charLimit} characters`;
           warning.style.color = '#e74c3c';
         } else if (currentCount >= charLimit * 0.9) {
+          textInput.readOnly = false;
           warning.textContent = `⚠️ Approaching character limit (${currentCount}/${charLimit})`;
           warning.style.color = '#f39c12';
         } else {
+          textInput.readOnly = false;
           warning.textContent = `Characters: ${currentCount}/${charLimit}`;
           warning.style.color = '#2ecc71';
         }
         
         textInput.parentNode.insertBefore(warning, textInput.nextSibling);
-      }
+      }else {
+        // If no limit is set, ensure textarea is always editable
+        textInput.readOnly = false;
+    }
     }
     
     // Remove existing warning
