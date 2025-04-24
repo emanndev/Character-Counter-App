@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+
    // DOM Elements for theme toggle
    const themeToggle = document.getElementById('themeToggle');
    const themeIcon = document.getElementById('themeIcon');
@@ -49,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
    } else {
        setDarkTheme();
    }
-
    // Theme toggle event listener
    themeToggle.addEventListener('click', () => {
        if (currentTheme === 'light') {
@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
            setLightTheme();
        }
    });
+
 
    function setLightTheme() {
        // Update classes
@@ -132,7 +133,7 @@ function toggleShowMore(e) {
   calculateLetterDensity(textInput.value);
 }
 
-  
+
   // Update reading time display
   function updateReadingTime(wordCount) {
     const minutes = Math.ceil(wordCount / averageReadingSpeed);
@@ -151,7 +152,7 @@ function toggleShowMore(e) {
           densityGrid.innerHTML = '<p>No characters found. Start typing to see letter density</p>';
           return;
       }
-      
+
       // Count each letter occurrence
       const letterCounts = {};
       for (const letter of letters) {
@@ -184,6 +185,7 @@ function toggleShowMore(e) {
           densityGrid.appendChild(bar);
       });
     
+
        // Show See More button with arrowhead if there are more than 5 letters
        if (sortedLetters.length > 5 && !showAllLetters) {
           seeMoreBtn.innerHTML = 'See more <i class="fa-sharp-duotone fa-solid fa-angle-down"></i>';
@@ -209,6 +211,7 @@ function toggleShowMore(e) {
         charLimit = parseInt(this.value);
         updateTextInput();
       });
+   
       
       const label = charLimitCheckbox.parentElement;
       label.appendChild(limitInput);
@@ -217,6 +220,7 @@ function toggleShowMore(e) {
       if (existingInput) {
         existingInput.remove();
       }
+
       charLimit = null;
       removeLimitWarning();
     }
@@ -246,6 +250,10 @@ function toggleShowMore(e) {
           textInput.style.borderColor = '';
           warning.textContent = `Characters: ${currentCount}/${charLimit}`;
           warning.style.color = '#2ecc71';
+
+    }
+    
+  
       }
       textInput.parentNode.insertBefore(warning, textInput.nextSibling);
   } else {
