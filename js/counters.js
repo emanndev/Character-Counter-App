@@ -13,3 +13,4 @@ export function countCharacters(text, excludeSpaces = false) {
     const sentences = text.split(/[.!?]+(?=\s|$)/);
     return sentences.filter(s => s.trim().length > 0).length;
   }
+  
