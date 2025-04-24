@@ -21,3 +21,22 @@ describe('countCharacters', () => {
         expect(countCharacters('   ', true)).toBe(0);
       });
   });
+
+  describe('countWords', () => {
+    test('counts words correctly', () => {
+      expect(countWords('hello world')).toBe(2);
+    });
+    test('handles empty string', () => {
+        expect(countWords('')).toBe(0);
+      });
+      test('checks plenty whitespace', () => {
+        expect(countWords('hello    world')).toBe(2);
+        expect(countWords('   hello   world   ')).toBe(2);
+      });
+      test('checks for hyphenated words', () => {
+        expect(countWords('state-of-the-art')).toBe(1);
+      });
+      test('handles apostrophes', () => {
+        expect(countWords("don't stop")).toBe(2);
+      });
+  });
