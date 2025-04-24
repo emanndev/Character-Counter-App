@@ -1,5 +1,7 @@
 import { countCharacters, countWords, countSentences } from "../js/counters";
 
+  //Unit testing for character counter
+
 describe('countCharacters', () => {
     test('counts all characters by default', () => {
       expect(countCharacters('Hello world')).toBe(11);
@@ -40,3 +42,20 @@ describe('countCharacters', () => {
         expect(countWords("don't stop")).toBe(2);
       });
   });
+
+  describe('countSentences', () => {
+    test('counts sentences', () => {
+      expect(countSentences('Hello. World!')).toBe(2);
+    });
+    test('handles empty string', () => {
+        expect(countSentences('')).toBe(0);
+      });
+      test('handles question and exclamation marks', () => {
+        expect(countSentences('Hello? World! How are you?')).toBe(3);
+      });
+      test('handles quotes and parentheses', () => {
+        expect(countSentences('He said, "Hello!" (Then left.)')).toBe(1);
+      });
+  });
+  
+

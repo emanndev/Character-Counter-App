@@ -264,3 +264,23 @@ function toggleShowMore(e) {
 
  
 });
+
+export function initTextInput() {
+  const textInput = document.getElementById('textInput');
+  const charLimitCheckbox = document.getElementById('charLimit');
+  const excludeSpacesCheckbox = document.getElementById('excludeSpaces');
+
+  textInput.addEventListener('input', updateTextInput);
+  charLimitCheckbox.addEventListener('change', toggleCharLimitInput);
+  excludeSpacesCheckbox.addEventListener('change', updateTextInput);
+  updateTextInput(); // initialize on load
+}
+
+export {
+  updateTextInput,
+  toggleCharLimitInput,
+  checkCharacterLimit,
+  removeLimitWarning
+};
+
+export default initTextInput;
