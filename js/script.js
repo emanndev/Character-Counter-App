@@ -1,286 +1,215 @@
 import { countCharacters, countWords, countSentences } from './counters.js';
 import { updateCharacterDisplay, updateWordDisplay, updateSentenceDisplay } from './display.js';
 
+// DOM Elements
+const textInput = document.getElementById('textInput');
+const readingTime = document.getElementById('readingTime');
+const densityGrid = document.querySelector('.density-grid');
+const charLimitCheckbox = document.getElementById('charLimit');
+const excludeSpacesCheckbox = document.getElementById('excludeSpaces');
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const body = document.body;
+const logo = document.getElementById('logo');
 
-document.addEventListener('DOMContentLoaded', function() {
+// Application state
+let charLimit = null;
+let showAllLetters = false;
+const averageReadingSpeed = 200;
 
-  //animation for letters cube preloader
-  window.addEventListener("load", () => {
-      const preloader = document.getElementById("preloader");
+// Create See More button (only once!)
+const seeMoreBtn = document.createElement('button');
+seeMoreBtn.className = 'see-more';
+seeMoreBtn.innerHTML = 'See more <span class="arrowhead"></span>';
 
-    
-      // Fade out the cube preloader
-      preloader.style.transition = "opacity 2s ease";
-      preloader.style.opacity = "0";
-    
-      setTimeout(() => {
-        preloader.style.display = "none";
-        document.body.classList.add("page-loaded");
-      }, 1000);
-    });
+// Initialize theme
+let currentTheme = localStorage.getItem('theme') || 
+                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
-
-
-  // DOM Elements
-  const textInput = document.getElementById('textInput');
-  const totalCharsText = document.getElementById('totalCharactersText');
-  const wordCountText = document.getElementById('wordCountText');
-  const sentenceCountText = document.getElementById('sentenceCountText');
-  const readingTime = document.getElementById('readingTime');
-  const densityGrid = document.querySelector('.density-grid');
-  const charLimitCheckbox = document.getElementById('charLimit');
-  const excludeSpacesCheckbox = document.getElementById('excludeSpaces');
-
-
-
-   // DOM Elements for theme toggle
-   const themeToggle = document.getElementById('themeToggle');
-   const themeIcon = document.getElementById('themeIcon');
-   const body = document.body;
-   const logo = document.getElementById('logo');
-   
-   // Getting the saved theme from localStorage
-   let currentTheme = localStorage.getItem('theme') || 
-                     (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-   
-   // Set initial theme
-   if (currentTheme === 'light') {
-       setLightTheme();
-   } else {
-       setDarkTheme();
-   }
-
-   // Theme toggle event listener
-   themeToggle.addEventListener('click', () => {
-       if (currentTheme === 'light') {
-           setDarkTheme();
-       } else {
-           setLightTheme();
-       }
-   });
-
-   function setLightTheme() {
-       // Update classes
-       body.classList.remove('dark-theme');
-       body.classList.add('light-theme');
-       document.documentElement.setAttribute('data-theme', 'light');
-       themeIcon.src = "./assets/images/icon-moon.svg";
-       logo.src = "./assets/images/logo-light-theme.svg";
-
-       localStorage.setItem('theme', 'light');
-       currentTheme = 'light';
-   }
-
-   function setDarkTheme() {
-       // Update classes
-       body.classList.remove('light-theme');
-       body.classList.add('dark-theme');
-       document.documentElement.setAttribute('data-theme', 'dark');  
-       themeIcon.src = "./assets/images/icon-sun.svg";
-       logo.src = "./assets/images/logo-dark-theme.svg";
-       
-       localStorage.setItem('theme', 'dark');
-       currentTheme = 'dark';
-   }
-   themeToggle.setAttribute('aria-pressed', currentTheme === 'dark');
-
-
-  let charLimit = null;
-  let showAllLetters = false;
-  const averageReadingSpeed = 200;
-  
-
-    // Create See More button with arrowhead down symbol
-    const seeMoreBtn = document.createElement('button');
-    seeMoreBtn.className = 'see-more';
-    seeMoreBtn.innerHTML = 'See more <span class="arrowhead"></span>';
-    seeMoreBtn.addEventListener('click', toggleShowMore);
-  
-  // Event Listeners
-  textInput.addEventListener('input', updateTextInput);
-  charLimitCheckbox.addEventListener('change', toggleCharLimitInput);
-  excludeSpacesCheckbox.addEventListener('change', updateTextInput);
-  
-  updateTextInput();
-
-
-  // Update text input function
-  function updateTextInput() {
+// Main application functions
+function updateTextInput() {
     const text = textInput.value;
     const excludeSpaces = excludeSpacesCheckbox.checked;
     
-    // Calculate counts using the pure functions
     const charCount = countCharacters(text, excludeSpaces);
     const wordCount = countWords(text);
     const sentenceCount = countSentences(text);
     
-    // Update displays
     updateCharacterDisplay(charCount, excludeSpaces);
     updateWordDisplay(wordCount);
     updateSentenceDisplay(sentenceCount);
     
-    // Call other functions
     updateReadingTime(wordCount);
     calculateLetterDensity(text);
     checkCharacterLimit(charCount);
-  }
-
-// Toggle Show More/Less
-function toggleShowMore(e) {
-  e.preventDefault();
-  showAllLetters = !showAllLetters;
-  calculateLetterDensity(textInput.value);
 }
 
-  
-  // Update reading time display
-  function updateReadingTime(wordCount) {
+function toggleShowMore(e) {
+    e.preventDefault();
+    showAllLetters = !showAllLetters;
+    calculateLetterDensity(textInput.value);
+}
+
+function updateReadingTime(wordCount) {
     const minutes = Math.ceil(wordCount / averageReadingSpeed);
     readingTime.textContent = `Approx. reading time: ${minutes} minute${minutes !== 1 ? 's' : ''}`;
-  }
-  
-  function calculateLetterDensity(text) {
-      densityGrid.innerHTML = '';
-      
-      // Remove non-letter characters and convert to lowercase
-      // Replace all non-letter characters with empty string
-      const letters = text.toLowerCase().replace(/[^a-z]/g, '');
-      const totalLetters = letters.length;
+}
+
+function calculateLetterDensity(text) {
+    densityGrid.innerHTML = '';
+    const letters = text.toLowerCase().replace(/[^a-z]/g, '');
+    const totalLetters = letters.length;
     
-      if (totalLetters === 0) {
-          densityGrid.innerHTML = '<p>No characters found. Start typing to see letter density</p>';
-          return;
-      }
-      
-      // Count each letter occurrence
-      const letterCounts = {};
-      for (const letter of letters) {
-          letterCounts[letter] = (letterCounts[letter] || 0) + 1;
-      }
-      
-      // Convert to array and sort by count
-      const sortedLetters = Object.entries(letterCounts).sort((a, b) => b[1] - a[1]);
-      const lettersToShow = showAllLetters ? sortedLetters : sortedLetters.slice(0, 5);
-      
-      // display each progress bars for the letters
-      lettersToShow.forEach(([letter, count]) => {
-          const percentage = ((count / totalLetters) * 100).toFixed(2);
-          
-          const bar = document.createElement('div');
-          bar.className = 'bar';
-          
-          bar.innerHTML = `
-              <div class="info">
-                  <span>${letter.toUpperCase()}</span>
-              </div>
-              <div class="progress-bar">
-                  <span class="letter-${letter}" style="width: ${percentage}%"></span>
-              </div>
-              <div class="percentage">
-                  <span class="percentage">${count} (${percentage}%)</span>
-              </div>
-          `;
-          
-          densityGrid.appendChild(bar);
-      });
+    if (totalLetters === 0) {
+        densityGrid.innerHTML = '<p>No characters found. Start typing to see letter density</p>';
+        return;
+    }
     
-       // Show See More button with arrowhead if there are more than 5 letters
-       if (sortedLetters.length > 5 && !showAllLetters) {
-          seeMoreBtn.innerHTML = 'See more <i class="fa-sharp-duotone fa-solid fa-angle-down"></i>';
-          densityGrid.appendChild(seeMoreBtn);
-      }
-      // Show See Less button with arrowhead up when expanded
-      else if (sortedLetters.length > 5 && showAllLetters) {
-          seeMoreBtn.innerHTML = 'See less <i class="fa-sharp-duotone fa-solid fa-angle-up"></i>';
-          densityGrid.appendChild(seeMoreBtn);
-      }
-  }
-  
-  // Character Limit Functionality
-  function toggleCharLimitInput() {
+    const letterCounts = {};
+    for (const letter of letters) {
+        letterCounts[letter] = (letterCounts[letter] || 0) + 1;
+    }
+    
+    const sortedLetters = Object.entries(letterCounts).sort((a, b) => b[1] - a[1]);
+    const lettersToShow = showAllLetters ? sortedLetters : sortedLetters.slice(0, 5);
+    
+    lettersToShow.forEach(([letter, count]) => {
+        const percentage = ((count / totalLetters) * 100).toFixed(2);
+        const bar = document.createElement('div');
+        bar.className = 'bar';
+        bar.innerHTML = `
+            <div class="info"><span>${letter.toUpperCase()}</span></div>
+            <div class="progress-bar"><span class="letter-${letter}" style="width: ${percentage}%"></span></div>
+            <div class="percentage"><span>${count} (${percentage}%)</span></div>
+        `;
+        densityGrid.appendChild(bar);
+    });
+    
+    if (sortedLetters.length > 5) {
+        seeMoreBtn.innerHTML = showAllLetters 
+            ? 'See less <i class="fa-sharp-duotone fa-solid fa-angle-up"></i>'
+            : 'See more <i class="fa-sharp-duotone fa-solid fa-angle-down"></i>';
+        densityGrid.appendChild(seeMoreBtn);
+    }
+}
+
+function toggleCharLimitInput() {
     if (charLimitCheckbox.checked) {
-      const limitInput = document.createElement('input');
-      limitInput.type = 'number';
-      limitInput.min = '1';
-      limitInput.placeholder = 'Enter limit';
-      limitInput.className = 'char-limit-input';
-      
-      limitInput.addEventListener('change', function() {
-        charLimit = parseInt(this.value);
-        updateTextInput();
-      });
-      
-      const label = charLimitCheckbox.parentElement;
-      label.appendChild(limitInput);
+        const limitInput = document.createElement('input');
+        limitInput.type = 'number';
+        limitInput.min = '1';
+        limitInput.placeholder = 'Enter limit';
+        limitInput.className = 'char-limit-input';
+        limitInput.addEventListener('change', () => {
+            charLimit = parseInt(limitInput.value);
+            updateTextInput();
+        });
+        charLimitCheckbox.parentElement.appendChild(limitInput);
     } else {
-      const existingInput = document.querySelector('.char-limit-input');
-      if (existingInput) {
-        existingInput.remove();
-      }
-      charLimit = null;
-      removeLimitWarning();
+        const existingInput = document.querySelector('.char-limit-input');
+        if (existingInput) existingInput.remove();
+        charLimit = null;
+        removeLimitWarning();
     }
-  }
-  
-  // Check Character Limit
- function checkCharacterLimit(currentCount) {
-  removeLimitWarning();
-  if (charLimit && charLimit > 0) {
-      const warning = document.createElement('div');
-      warning.className = 'limit-warning';
-      
-      // conditon to check if over the limit
-      if (currentCount >= charLimit) {
-          const textArea = document.querySelector('textarea');
-          textArea.style.borderColor = '#e74c3c';
-          textInput.value = textInput.value.substring(0, charLimit);
-          warning.textContent = `ⓘ Limit reached at ${charLimit} characters`;
-          warning.style.color = '#e74c3c';
-      } 
-      else if (currentCount >= charLimit * 0.9) {
-          textInput.style.borderColor = ''; // Reset border color
-          warning.textContent = `⚠️ Approaching character limit (${currentCount}/${charLimit})`;
-          warning.style.color = '#f39c12';
-      } 
-      else {
-          textInput.style.borderColor = '';
-          warning.textContent = `Characters: ${currentCount}/${charLimit}`;
-          warning.style.color = '#2ecc71';
-      }
-      textInput.parentNode.insertBefore(warning, textInput.nextSibling);
-  } else {
-      textInput.style.borderColor = '';
-  }
 }
-  
-  // Remove warning
-  function removeLimitWarning() {
+
+function checkCharacterLimit(currentCount) {
+    removeLimitWarning();
+    if (!charLimit || charLimit <= 0) {
+        textInput.style.borderColor = '';
+        return;
+    }
+    
+    const warning = document.createElement('div');
+    warning.className = 'limit-warning';
+    
+    if (currentCount >= charLimit) {
+        textInput.style.borderColor = '#e74c3c';
+        textInput.value = textInput.value.substring(0, charLimit);
+        warning.textContent = `ⓘ Limit reached at ${charLimit} characters`;
+        warning.style.color = '#e74c3c';
+    } else if (currentCount >= charLimit * 0.9) {
+        textInput.style.borderColor = '';
+        warning.textContent = `⚠️ Approaching character limit (${currentCount}/${charLimit})`;
+        warning.style.color = '#f39c12';
+    } else {
+        textInput.style.borderColor = '';
+        warning.textContent = `Characters: ${currentCount}/${charLimit}`;
+        warning.style.color = '#2ecc71';
+    }
+    textInput.parentNode.insertBefore(warning, textInput.nextSibling);
+}
+
+function removeLimitWarning() {
     const existingWarning = document.querySelector('.limit-warning');
-    if (existingWarning) {
-      existingWarning.remove();
-    }
-  }
-
-
- 
-});
-
-export function initTextInput() {
-  const textInput = document.getElementById('textInput');
-  const charLimitCheckbox = document.getElementById('charLimit');
-  const excludeSpacesCheckbox = document.getElementById('excludeSpaces');
-
-  textInput.addEventListener('input', updateTextInput);
-  charLimitCheckbox.addEventListener('change', toggleCharLimitInput);
-  excludeSpacesCheckbox.addEventListener('change', updateTextInput);
-  updateTextInput(); // initialize on load
+    if (existingWarning) existingWarning.remove();
 }
 
+// Theme functions
+function setLightTheme() {
+    body.classList.remove('dark-theme');
+    body.classList.add('light-theme');
+    document.documentElement.setAttribute('data-theme', 'light');
+    themeIcon.src = "./assets/images/icon-moon.svg";
+    logo.src = "./assets/images/logo-light-theme.svg";
+    localStorage.setItem('theme', 'light');
+    currentTheme = 'light';
+    themeToggle.setAttribute('aria-pressed', 'false');
+}
+
+function setDarkTheme() {
+    body.classList.remove('light-theme');
+    body.classList.add('dark-theme');
+    document.documentElement.setAttribute('data-theme', 'dark');  
+    themeIcon.src = "./assets/images/icon-sun.svg";
+    logo.src = "./assets/images/logo-dark-theme.svg";
+    localStorage.setItem('theme', 'dark');
+    currentTheme = 'dark';
+    themeToggle.setAttribute('aria-pressed', 'true');
+}
+
+function toggleTheme() {
+    if (currentTheme === 'light') setDarkTheme();
+    else setLightTheme();
+}
+
+// Initialization
+function initLoader() {
+    const preloader = document.getElementById('preloader');
+    preloader.style.transition = "opacity 2s ease";
+    preloader.style.opacity = "0";
+    setTimeout(() => {
+        preloader.style.display = "none";
+        document.body.classList.add("page-loaded");
+    }, 1000);
+}
+
+function initApp() {
+    // Set initial theme
+    if (currentTheme === 'light') setLightTheme();
+    else setDarkTheme();
+    
+    // Set up event listeners
+    textInput.addEventListener('input', updateTextInput);
+    charLimitCheckbox.addEventListener('change', toggleCharLimitInput);
+    excludeSpacesCheckbox.addEventListener('change', updateTextInput);
+    themeToggle.addEventListener('click', toggleTheme);
+    seeMoreBtn.addEventListener('click', toggleShowMore);
+    
+    // Initialize with empty values
+    updateTextInput();
+    
+    // Set up loader
+    window.addEventListener('load', initLoader);
+}
+
+// Start the application
+initApp();
 export {
   updateTextInput,
   toggleCharLimitInput,
   checkCharacterLimit,
-  removeLimitWarning
+  removeLimitWarning,
+  calculateLetterDensity,
+  updateReadingTime
 };
-
-export default initTextInput;
